@@ -1,10 +1,3 @@
-/*
- * cameron campbell
- * advanced java
- * occc spring 2021
- * concurrency gui (producer-consumer)
- */
-
 
 import java.awt.*;
 import java.awt.event.*;
@@ -15,22 +8,10 @@ import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 
-/*
- * modified version of the given Producer-Consumer
- * program that accommodates a GUI for ease of use
- * and user control over producers and consumers
- */
+
 public class ProducerConsumer
 {
-	// class-relevant variables, fields and objects
 	
-
-
-   
-	
-
-   
-	// main method
 	public static void main(String [] args)
 	{
 		ProducerConsumerGUI pcg = new ProducerConsumerGUI();
@@ -117,28 +98,11 @@ public class ProducerConsumer
    } 
 
    
-   /*
-    * entirety of the GUI class, appended to the Producer-Consumer class.
-    * the GUI is divided between two phases, represented by two master frames
-    * where the subpanels and controls are housed: the prep phase and action phase.
-    * the prep phase is where the user can input the number of producers, consumers,
-    * average amount consumed, and average amount produced before entering the action
-    * phase, where the user can witness the actions of the producers and consumers
-    * through the constantly-updated resource integer and a text pane detailing what
-    * the producers and consumers are doing in the console output stream
-    */
+   
    static class ProducerConsumerGUI extends JFrame 
    implements ActionListener
    {
-	   /*
-	    * subclass-relevant objects, fields, and controls. i used a custom grid 
-	    * layout for the start button panel so that i could have more 
-	    * control over the size, shape, and alignment of the fields on the prep
-		* panel. i also chose to create an empty JPanel for the purpose of giving
-		* me more control over the exact positioning of controls in my grid layouts;
-		* any time i need a negative space, i can just add the gridSpace JPanel to
-		* the next grid cell
-	    */
+	   
 	   private JFrame errorFrame, actionFrame;
 	   private JPanel prepPanel, actionPanel, prepProducersPanel,
 	   prepConsumersPanel, prepCenterPanel,
@@ -159,11 +123,7 @@ public class ProducerConsumer
 	   private JPanel gridSpace = new JPanel();
 	   
 	   
-	   /*
-	    * the constructor performs basic frame setup for the prep pane. once
-	    * the user clicks the start button, the actionPhase method is called,
-	    * setting up the action panel
-	    */
+	   
 	   public ProducerConsumerGUI() 
 	   {
 		   // initial frame setup
@@ -241,13 +201,7 @@ public class ProducerConsumer
 	   }
 	   
 	   
-	   /*
-	    * actionPhaseCheck method handles the inputs for the four text fields
-	    * in the prep phase panel and checks if they're valid. if they are, then
-	    * they're sent directly to the actionPhase method for processing into the
-	    * final portion of the GUI. otherwise, the user is prompted to retry their
-	    * inputs until they become valid
-	    */
+	   
 	   public void actionPhaseCheck(String pro ,String con) 
 	   {
 		   try 
@@ -277,15 +231,7 @@ public class ProducerConsumer
 	   }
 	   
 	   
-	   /*
-	    * the actionPhase method uses the successfully passed integers from actionPhaseCheck
-	    * to setup the static average variables used by the consumer and producer custom threads
-	    * ('theBuffer' has become 'resource' and the random resource generated or consumed is now
-	    * based off of these average values). the method then initializes the frame for the action
-	    * phase, sets up the console's output to the JTextArea in the action panel, runs the frame,
-	    * and then finally sets up the SwingWorker for the resource value so that it will constantly
-	    * update for the user
-	    */
+	   
 	   public void actionPhase(int pro, 
 			   int con) 
 	   {
@@ -311,11 +257,7 @@ public class ProducerConsumer
 		      producerThread1.start();
 		      consumerThread1.start();
 		   
-		   /*
-		    * to display the console in actionTextPane, a replacement class must be created
-		    * for the output stream. this will allow the program to redirect all console 
-		    * messages to actionTextPane
-		    */
+		   
 		   class ConsoleOutputStream extends OutputStream 
 		   {
 			   private JTextArea textArea;
@@ -334,14 +276,7 @@ public class ProducerConsumer
 			   }
 		   }
 		   
-		   /*
-		    * now that everything has been prepared, the action phase is ready
-		    * to begin; the actionFrame and its components are instantiated and
-		    * display the current resource value and a log of the console's
-		    * output. a custom thread will need to be created in order to 
-		    * provide this information to the user, and so the GUI class
-		    * will also house an override of SwingWorker
-		    */
+		   
 		   actionFrame = new JFrame("Action Phase");
 		   actionFrame.setLayout(new BorderLayout());
 		   actionFrame.setSize(420, 310);
@@ -368,10 +303,7 @@ public class ProducerConsumer
 		   actionFrame.add(actionPanel);
 		   actionFrame.show();
 		   
-		   /*
-		    * finally, a swingworker object is instantiated to update the actionResourceText
-		    * with the current resource value now that it has been initialized
-		    */
+		   
 //		   SwingWorker updater = new SwingWorker()
 //		   {
 //			   @Override
@@ -387,12 +319,7 @@ public class ProducerConsumer
 	   }
 	   
 	   
-	   /*
-	    * obligatory implemented ActionListener method. i prefer individual
-	    * methods called by the parameters of the addActionListener calls
-	    * for each control in the constructor, as it's generally cleaner and
-	    * more reliable
-	    */
+	   
 	   @Override
 	   public void actionPerformed(ActionEvent arg0) {}
 	}
