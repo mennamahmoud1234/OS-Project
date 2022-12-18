@@ -3,7 +3,7 @@ import java.util.List;
 public class ImportingExportingFactory {
 
  public static void main(String args[]) {
-  List<Integer> inventory = new LinkedList<>(); //Creating shared object
+  List<Integer> inventory = new LinkedList<>(); //Creating Shared Object 
    
   Importing importingTruck0=new Importing(inventory, 0);
   Exporting ExportingTruck0=new Exporting(inventory);
